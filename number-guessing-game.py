@@ -12,12 +12,12 @@ def clear_screen():
 
 
 def save_data(data):
-    fieldnames = ["username", "attempts", "time"]
+    fieldnames = ["username", "attempts", "time", "Won?"]
     with open("scores.csv", "w") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
-        for row in data:
-            writer.writerow(row)
+        for key, value in enumerate(data):
+            writer.writerow(value)
 
 
 def main_game(mode):
@@ -27,15 +27,20 @@ def main_game(mode):
     username = input("Enter username: ").upper().strip()
     clear_screen()
     print("Okay, let's begin in...")
-    time.sleep(1)
+    time.sleep(2)
+    clear_screen()
     print("3...")
     time.sleep(1)
+    clear_screen()
     print("2...")
     time.sleep(1)
+    clear_screen()
     print("1...")
     time.sleep(1)
+    clear_screen()
     print("Start!")
     time.sleep(1)
+    clear_screen()
     start_time = time.time()
     attempts = 0
     if mode == "easy":
@@ -44,7 +49,7 @@ def main_game(mode):
         attempts = 5
     elif mode == "hard":
         attempts = 3
-    number = random.randint(1, 100)
+    number = random.randint(1, 10)
     answer = 0
     won = False
     while number != answer or attempts != 0:
@@ -66,10 +71,15 @@ def main_game(mode):
         print(
             f"[bold green]Congratulations![/bold green]\t\n{username} guessed the number '{number}' in {elapsed_time} seconds!"
         )
-        time.sleep(2)
+        time.sleep(3)
         print("Recording your score...")
         clear_screen()
-        new_entry = {"username": username, "attempts": attempts, "time": elapsed_time}
+        new_entry = {
+            "username": username,
+            "attempts": attempts,
+            "time": elapsed_time,
+            "won": True,
+        }
         save_data(new_entry)
         clear_screen()
         print("Done! Exiting game...")
@@ -78,12 +88,17 @@ def main_game(mode):
     if won == False and attempts == 0:
         clear_screen()
         print(
-            "😟 [bold orange]You've ran out of attempts![/bold orange] Recording your score..."
+            f"😟 [bold orange]You've ran out of attempts![/bold orange] The number was {number}! Recording your score..."
         )
-        time.sleep(2)
+        time.sleep(3)
         print("Recording your score...")
         clear_screen()
-        new_entry = {"username": username, "attempts": attempts, "time": elapsed_time}
+        new_entry = {
+            "username": username,
+            "attempts": attempts,
+            "time": elapsed_time,
+            "won": False,
+        }
         save_data(new_entry)
         clear_screen()
         print("Done! Exiting game...")
