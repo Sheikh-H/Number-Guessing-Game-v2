@@ -1,1 +1,3 @@
-username,attempts,time,Won?
+username,attempts,time,won?
+ALIF,0,4.9,False
+HUSSAIN,5,4.0,True

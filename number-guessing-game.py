@@ -12,12 +12,24 @@ def clear_screen():
 
 
 def save_data(data):
-    fieldnames = ["username", "attempts", "time", "Won?"]
-    with open("scores.csv", "w") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        writer.writeheader()
-        for key, value in enumerate(data):
-            writer.writerow(value)
+    fieldnames = ["username", "attempts", "time", "won?"]
+    if not open("scores.csv"):
+        with open("scores.csv", "w") as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerow(data)
+    else:
+        with open("scores.csv", 'r') as f:
+            scores = csv.DictReader(f, fieldnames=fieldnames)
+            for score in scores:
+                if score['username'] == data['username']: 
+                    with open("scores.csv", "w", newline="") as f:
+                        writer = csv.DictWriter(f, fieldnames=fieldnames)
+                        writer.writerow(data)
+                else:
+                    with open("scores.csv", "w", newline="") as f:
+                        writer = csv.DictWriter(f, fieldnames=fieldnames)
+                        writer.writerow(data)
 
 
 def main_game(mode):
@@ -52,6 +64,7 @@ def main_game(mode):
     number = random.randint(1, 10)
     answer = 0
     won = False
+    attempts_made = 0
     while number != answer or attempts != 0:
         try:
             answer = int(input("Enter your guess: "))
@@ -59,13 +72,14 @@ def main_game(mode):
             print("Please use numeric digits only!")
             continue
         attempts -= 1
+        attempts_made += 1
         if answer == number:
             won = True
             break
         if attempts == 0:
             break
     end_time = time.time()
-    elapsed_time = end_time - start_time
+    elapsed_time = round(end_time - start_time, 1)
     if won == True:
         clear_screen()
         print(
@@ -73,12 +87,13 @@ def main_game(mode):
         )
         time.sleep(3)
         print("Recording your score...")
+        time.sleep(2)
         clear_screen()
         new_entry = {
             "username": username,
-            "attempts": attempts,
+            "attempts": attempts_made,
             "time": elapsed_time,
-            "won": True,
+            "won?": True,
         }
         save_data(new_entry)
         clear_screen()
@@ -92,17 +107,19 @@ def main_game(mode):
         )
         time.sleep(3)
         print("Recording your score...")
+        time.sleep(2)
         clear_screen()
         new_entry = {
             "username": username,
-            "attempts": attempts,
+            "attempts": attempts_made,
             "time": elapsed_time,
-            "won": False,
+            "won?": False,
         }
         save_data(new_entry)
         clear_screen()
         print("Done! Exiting game...")
         time.sleep(2)
+        clear_screen()
         exit()
 
 
