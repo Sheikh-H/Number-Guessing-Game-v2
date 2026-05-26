@@ -13,7 +13,7 @@ def clear_screen():
 
 def save_data(data):
     fieldnames = ["username", "attempts", "time", "won?"]
-    if not open("scores.csv"):
+    if not os.path.exists("scores.csv"):
         with open("scores.csv", "w") as f:
             writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
