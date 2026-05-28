@@ -26,11 +26,38 @@ def save_data(data):
     found = False
 
     for score in scores:
-        if score["username"] == data["username"]:
-            score["attempts"] = data["attempts"]
-            score["time"] = data["time"]
-            score["won?"] = data["won?"]
+        if score["username"].lower() == data["username"].lower():
             found = True
+            while True:
+                clear_screen()
+                option = (
+                    input("Would you like to update your current score?: ")
+                    .lower()
+                    .strip()
+                )
+                if option in ["yes", "1"]:
+                    score["attempts"] = data["attempts"]
+                    score["time"] = data["time"]
+                    score["won?"] = data["won?"]
+                    print(
+                        f"Score has been updated for [bold green]{data['username']}[/bold green]!"
+                    )
+                    time.sleep(2)
+                    clear_screen()
+                    break
+                elif option in ["no", "2"]:
+                    clear_screen()
+                    print(
+                        f"Old score will be kept instead for [bold green]{data['username']}[/bold green]!"
+                    )
+                    time.sleep(2)
+                    clear_screen()
+                    break
+                else:
+                    clear_screen()
+                    print("Please enter either 'Yes' or 'No'...")
+                    time.sleep(1)
+                    clear_screen()
             break
 
     if not found:
@@ -40,7 +67,7 @@ def save_data(data):
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(scores)
-        #This function was made by AI. As I'm learning to use CSV files similar to json files. I'm stil trying to work around how the data can be used throughout though by this point I've been able to use json files fine it's just being able to use a csv file in the same manner. In json it's easier to just use 'w' or 'r' and then modify the data in memory to then store it as the code syntax is a little better but in this format it still quite new to me.
+        # This function was made by AI. As I'm learning to use CSV files similar to json files. I'm stil trying to work around how the data can be used throughout though by this point I've been able to use json files fine it's just being able to use a csv file in the same manner. In json it's easier to just use 'w' or 'r' and then modify the data in memory to then store it as the code syntax is a little better but in this format it still quite new to me.
 
 
 def main_game(mode):
