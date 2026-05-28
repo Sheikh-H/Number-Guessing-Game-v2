@@ -14,22 +14,33 @@ def clear_screen():
 def save_data(data):
     fieldnames = ["username", "attempts", "time", "won?"]
     if not os.path.exists("scores.csv"):
-        with open("scores.csv", "w") as f:
+        with open("scores.csv", "w", newline="") as f:
             writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerow(data)
-    else:
-        with open("scores.csv", 'r') as f:
-            scores = csv.DictReader(f, fieldnames=fieldnames)
-            for score in scores:
-                if score['username'] == data['username']: 
-                    with open("scores.csv", "w", newline="") as f:
-                        writer = csv.DictWriter(f, fieldnames=fieldnames)
-                        writer.writerow(data)
-                else:
-                    with open("scores.csv", "w", newline="") as f:
-                        writer = csv.DictWriter(f, fieldnames=fieldnames)
-                        writer.writerow(data)
+        return
+
+    with open("scores.csv", "r", newline="") as f:
+        scores = list(csv.DictReader(f))
+
+    found = False
+
+    for score in scores:
+        if score["username"] == data["username"]:
+            score["attempts"] = data["attempts"]
+            score["time"] = data["time"]
+            score["won?"] = data["won?"]
+            found = True
+            break
+
+    if not found:
+        scores.append(data)
+
+    with open("scores.csv", "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(scores)
+        #This function was made by AI. As I'm learning to use CSV files similar to json files. I'm stil trying to work around how the data can be used throughout though by this point I've been able to use json files fine it's just being able to use a csv file in the same manner. In json it's easier to just use 'w' or 'r' and then modify the data in memory to then store it as the code syntax is a little better but in this format it still quite new to me.
 
 
 def main_game(mode):
