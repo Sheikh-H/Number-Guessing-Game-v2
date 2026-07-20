@@ -9,7 +9,7 @@
 
 ## 📘 Project Overview
 
-**CipherGuess** is a command-line number guessing game developed in Python as part of the [Number Guessing Game](https://roadmap.sh/projects/number-guessing-game) project on roadmap.sh.
+**Number Guessing Game v2** is a command-line number guessing game developed in Python as part of the [Number Guessing Game](https://roadmap.sh/projects/number-guessing-game) project on roadmap.sh.
 
 The original version of this project was built using JSON storage and focused mainly on gameplay logic. This rewritten version was specifically created to improve understanding of CSV persistence, file handling, and data management inside Python applications.
 
@@ -48,15 +48,17 @@ This repository represents a major rewrite of the original number guessing game.
 
 The earlier version focused primarily on gameplay and JSON handling, whereas the rewritten version focuses much more heavily on architecture, persistence management, CSV workflows, and cleaner application structure.
 
-| Feature           | Old Version (JSON Edition)                         | New Version (CipherGuess)                                       |
-| ----------------- | -------------------------------------------------- | --------------------------------------------------------------- |
+
+
+| Feature           | Old Version (<a href="https://github.com/Sheikh-H/Number-Guessing-Game" style="color: white; text-decoration: underline;">JSON Edition</a>)                        | New Version (Number Guessing Game v2)                         |
+| ----------------- | -------------------------------------------------- | -------------------------------------------------------------- |
 | Persistence Layer | JSON storage using `json.load()` and `json.dump()` | CSV persistence using `csv.DictReader()` and `csv.DictWriter()` |
-| Data Updates      | Direct object mutation                             | Manual row-based persistence rewriting                          |
-| Difficulty Modes  | Single gameplay structure                          | Multiple difficulty levels                                      |
-| Terminal Styling  | Basic print statements                             | Enhanced CLI formatting using `rich`                            |
-| Score Handling    | Always appended scores                             | Username matching and record updating                           |
-| Learning Focus    | Gameplay logic                                     | Persistence architecture and CSV workflows                      |
-| AI Usage          | Large portions AI-assisted                         | Much more independently structured and reasoned                 |
+| Data Updates      | Direct object mutation                             | Manual row-based persistence rewriting                         |
+| Difficulty Modes  | Single gameplay structure                          | Multiple difficulty levels                                     |
+| Terminal Styling  | Basic print statements                             | Enhanced CLI formatting using `rich`                           |
+| Score Handling    | Always appended scores                             | Username matching and record updating                          |
+| Learning Focus    | Gameplay logic                                     | Persistence architecture and CSV workflows                     |
+| AI Usage          | Large portions AI-assisted                         | Much more independently structured and reasoned                |
 
 ---
 
@@ -95,7 +97,7 @@ This rewritten version intentionally focused much more heavily on independently 
 ## 🧩 Folder Structure
 
 ```text
-CipherGuess/
+Number Guessing Game v2/
 │
 ├── main.py             # Main game logic
 ├── scores.csv          # Auto-generated persistence file
@@ -111,13 +113,13 @@ CipherGuess/
 2. Clone the repository:
 
 ```bash
-git clone https://github.com/Sheikh-H/CipherGuess.git
+git clone https://github.com/Sheikh-H/Number-Guessing-Game-v2.git
 ```
 
 3. Navigate into the project directory:
 
 ```bash
-cd CipherGuess
+cd Number-Guessing-Game-v2
 ```
 
 4. Install dependencies:
