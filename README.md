@@ -1,4 +1,4 @@
-# 🎯 CipherGuess: CSV-Powered CLI Number Guessing Game
+# 🎯 CSV-Powered CLI Number Guessing Game
 
 <p align="center">
   <b>A terminal-based number guessing game engineered in Python.</b><br>
